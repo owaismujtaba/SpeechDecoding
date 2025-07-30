@@ -1,4 +1,5 @@
-from src.components.data.feature_extractor import MFCC_Extractor
+
+from src.components.data.eeg_mfcc_loader import DataLoader
 
 
 if __name__ == "__main__":
@@ -6,7 +7,6 @@ if __name__ == "__main__":
         subject_id = str(sub).zfill(2)
         print(f"Processing subject {subject_id}")
 
-        extractor = MFCC_Extractor(subject=subject_id)
-        extractor.read_audio()
-        extractor.get_mfcc_world_vocoder()
-        extractor.save_features()
+        dataloader =  DataLoader(subject_id=subject_id) #MFCC_Extractor(subject=subject_id)
+        eeg, mfcc = dataloader.align_stack_eeg_with_mfcc()
+        print(f'sub-{subject_id}, {eeg.shape, mfcc.shape}')
