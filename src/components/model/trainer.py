@@ -34,6 +34,7 @@ class Trainer:
             rec_mfcc[test] = model.model.predict(X_test)
 
             results[k] = self.evaluate_model(y_test, rec_mfcc[test])
+            print(f'sub-{self.subject} fold {k} {results[k]}')
 
         
         print(f'sub-{self.subject} has mean correlation of  {np.mean(results)}')
